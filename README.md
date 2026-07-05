@@ -1,5 +1,10 @@
 # Gatekeeper
 
+[![CI](https://github.com/abidedavana/Gatekeeper/actions/workflows/ci.yml/badge.svg)](https://github.com/abidedavana/Gatekeeper/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/abidedavana/Gatekeeper)](https://github.com/abidedavana/Gatekeeper/releases)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 Validate package names against PyPI and npm **before** you install them.
 
 Gatekeeper is a supply-chain hygiene tool (in the spirit of `pip-audit` or npm's
@@ -17,9 +22,25 @@ registry API, and (optionally) the GitHub users API.
 ## Installation
 
 ```bash
-pip install gatekeeper-cli          # from PyPI (once published)
-pip install .                       # from a checkout
+# pinned to a release tag (recommended)
+pip install git+https://github.com/abidedavana/Gatekeeper.git@v1.0.0
+
+# latest from main
+pip install git+https://github.com/abidedavana/Gatekeeper.git
+
+# from a checkout
+pip install .
+
+# as a container
+docker run --rm -v "$PWD:/work" ghcr.io/abidedavana/gatekeeper audit /work/requirements.txt
 ```
+
+Wheels and sdists are attached to every [GitHub release](https://github.com/abidedavana/Gatekeeper/releases).
+
+> **Note:** not yet on PyPI. The existing `gatekeeper-cli` project on PyPI is an
+> **unrelated package** — fittingly, exactly the kind of name collision this tool
+> warns about — so do not `pip install gatekeeper-cli`. PyPI publication will
+> happen under a different distribution name.
 
 Requires Python 3.10+.
 
@@ -57,7 +78,7 @@ Environment variables:
 ### CI usage
 
 ```yaml
-- run: pip install gatekeeper-cli
+- run: pip install git+https://github.com/abidedavana/Gatekeeper.git@v1.0.0
 - run: gatekeeper audit requirements.txt --json > gatekeeper-report.json
 ```
 
@@ -219,6 +240,14 @@ Notes for parsers: `score`/`level` are `null` whenever `status != "ok"`;
 are ISO 8601 UTC.
 
 ## Docker
+
+Prebuilt images are published to GHCR on every release:
+
+```bash
+docker pull ghcr.io/abidedavana/gatekeeper:latest
+```
+
+Or build locally:
 
 ```bash
 docker build -t gatekeeper .
