@@ -1,0 +1,32 @@
+{
+  "_comment": "Static co-occurrence map used for fire-and-forget cache prefetch. Checking a key package warms the cache for packages commonly installed alongside it.",
+  "pypi": {
+    "torch": ["torchvision", "torchaudio"],
+    "tensorflow": ["keras", "tensorboard"],
+    "requests": ["urllib3", "certifi", "charset-normalizer", "idna"],
+    "boto3": ["botocore", "s3transfer", "jmespath"],
+    "pandas": ["numpy", "python-dateutil", "pytz"],
+    "flask": ["werkzeug", "jinja2", "itsdangerous", "click"],
+    "django": ["asgiref", "sqlparse"],
+    "fastapi": ["starlette", "pydantic", "uvicorn"],
+    "sqlalchemy": ["greenlet", "alembic"],
+    "pytest": ["pluggy", "iniconfig", "coverage"],
+    "celery": ["kombu", "billiard", "vine", "amqp"],
+    "aiohttp": ["multidict", "yarl", "frozenlist", "aiosignal"],
+    "scikit-learn": ["numpy", "scipy", "joblib"],
+    "matplotlib": ["numpy", "pillow", "fonttools"],
+    "transformers": ["tokenizers", "safetensors", "huggingface-hub"]
+  },
+  "npm": {
+    "react": ["react-dom", "prop-types"],
+    "aws-sdk": ["@aws-sdk/client-s3", "@aws-sdk/client-dynamodb"],
+    "express": ["body-parser", "cors", "morgan", "cookie-parser"],
+    "webpack": ["webpack-cli", "webpack-dev-server", "babel-loader"],
+    "eslint": ["prettier", "@eslint/js"],
+    "jest": ["ts-jest", "@types/jest"],
+    "vue": ["vue-router", "vuex"],
+    "@babel/core": ["@babel/preset-env", "@babel/runtime"],
+    "tailwindcss": ["postcss", "autoprefixer"],
+    "redux": ["react-redux", "@reduxjs/toolkit"]
+  }
+}
