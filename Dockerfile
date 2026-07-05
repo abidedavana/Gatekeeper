@@ -4,14 +4,14 @@
 # Cache persists across runs if you mount it:
 #         docker run --rm -v gatekeeper-cache:/home/app/.gatekeeper ... gatekeeper check requests
 
-FROM python:3.12-slim AS build
+FROM python:3.14-slim AS build
 
 WORKDIR /src
 COPY pyproject.toml README.md ./
 COPY src ./src
 RUN pip install --no-cache-dir build && python -m build --wheel
 
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 RUN useradd --create-home app
 COPY --from=build /src/dist/*.whl /tmp/
